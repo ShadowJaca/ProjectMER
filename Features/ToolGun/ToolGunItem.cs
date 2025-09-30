@@ -1,3 +1,4 @@
+using Exiled.API.Features.Core.UserSettings;
 using InventorySystem.Items;
 using InventorySystem.Items.Firearms;
 using InventorySystem.Items.Firearms.Attachments;
@@ -81,14 +82,22 @@ public class ToolGunItem
 
 		ItemDictionary.Add(toolgun.ItemSerial, new ToolGunItem(toolgun));
 
-		ServerSpecificSettingsSync.SendOnJoinFilter = (_) => false; // Prevent all users from receiving the tools after joining the server.
-		ServerSpecificSettingsSync.DefinedSettings =
-		[
-			new SSGroupHeader("MapEditorReborn"),
-			new SSDropdownSetting(0, "Schematic Name", MapUtils.GetAvailableSchematicNames(), isServerOnly: true)
-		];
 
-		ServerSpecificSettingsSync.SendToPlayersConditionally(x => x.inventory.UserInventory.Items.Values.Any(x => x.IsToolGun(out ToolGunItem _)));
+		 var settings = new SettingBase[]
+		{
+			new HeaderSetting(0, "MapEditorReborn"),
+			new DropdownSetting(0, "Schematic Name", MapUtils.GetAvailableSchematicNames(), isServerOnly: true)
+		};
+		SettingBase.Register(settings);
+		
+		// ServerSpecificSettingsSync.SendOnJoinFilter = (_) => false; // Prevent all users from receiving the tools after joining the server.
+		// ServerSpecificSettingsSync.DefinedSettings =
+		// [
+		// 	new SSGroupHeader("MapEditorReborn"),
+		// 	new SSDropdownSetting(0, "Schematic Name", MapUtils.GetAvailableSchematicNames(), isServerOnly: true)
+		// ];
+
+		// ServerSpecificSettingsSync.SendToPlayersConditionally(x => x.inventory.UserInventory.Items.Values.Any(x => x.IsToolGun(out ToolGunItem _)));
 
 		return true;
 	}
