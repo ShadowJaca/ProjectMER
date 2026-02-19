@@ -14,6 +14,7 @@ public class SerializableDoor : SerializableObject
 	public bool IsLocked { get; set; } = false;
 	public DoorPermissionFlags RequiredPermissions { get; set; } = DoorPermissionFlags.None;
 	public bool RequireAll { get; set; } = true;
+	public GameObject Door { get; set; }
 
 	public override GameObject SpawnOrUpdateObject(Room? room = null, GameObject? instance = null)
 	{
@@ -24,25 +25,30 @@ public class SerializableDoor : SerializableObject
 
 		if (instance == null)
 		{
-			doorVariant = GameObject.Instantiate(DoorPrefab);
+			Door = GameObject.Instantiate(DoorPrefab, position, rotation);
+			doorVariant = Door.GetComponent<DoorVariant>();
 			if (doorVariant.TryGetComponent(out DoorRandomInitialStateExtension doorRandomInitialStateExtension))
 				GameObject.Destroy(doorRandomInitialStateExtension);
 		}
 		else
 		{
+			Door = instance;
 			doorVariant = instance.GetComponent<DoorVariant>();
 		}
-
+		
 		doorVariant.transform.SetPositionAndRotation(position, rotation);
 		doorVariant.transform.localScale = Scale;
-
+		
 		_prevType = DoorType;
 		SetupDoor(doorVariant);
+		
+		
+		NetworkServer.UnSpawn(Door);
+		NetworkServer.Spawn(Door);
+		// NetworkServer.UnSpawn(doorVariant.gameObject);
+		// NetworkServer.Spawn(doorVariant.gameObject);
 
-		NetworkServer.UnSpawn(doorVariant.gameObject);
-		NetworkServer.Spawn(doorVariant.gameObject);
-
-		return doorVariant.gameObject;
+		return Door;
 	}
 
 	public void SetupDoor(DoorVariant doorVariant)
@@ -52,11 +58,11 @@ public class SerializableDoor : SerializableObject
 		doorVariant.RequiredPermissions = new DoorPermissionsPolicy(RequiredPermissions, RequireAll);
 	}
 
-	private DoorVariant DoorPrefab
+	private GameObject DoorPrefab
 	{
 		get
 		{
-			DoorVariant prefab = DoorType switch
+			GameObject prefab = DoorType switch
 			{
 				DoorType.Lcz => PrefabManager.DoorLcz,
 				DoorType.Hcz => PrefabManager.DoorHcz,

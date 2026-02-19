@@ -1,4 +1,5 @@
 using AdminToys;
+using Exiled.API.Features;
 using Interactables.Interobjects.DoorUtils;
 using InventorySystem.Items.Firearms.Attachments;
 using MapGeneration.Distributors;
@@ -15,11 +16,11 @@ public static class PrefabManager
 
 	public static LightSourceToy LightSource { get; private set; }
 
-	public static DoorVariant DoorLcz { get; private set; }
-	public static DoorVariant DoorHcz { get; private set; }
-	public static DoorVariant DoorEz { get; private set; }
-	public static DoorVariant DoorHeavyBulk { get; private set; }
-	public static DoorVariant DoorGate { get; private set; }
+	public static GameObject DoorLcz { get; private set; }
+	public static GameObject DoorHcz { get; private set; }
+	public static GameObject DoorEz { get; private set; }
+	public static GameObject DoorHeavyBulk { get; private set; }
+	public static GameObject DoorGate { get; private set; }
 
 	public static WorkstationController Workstation { get; private set; }
 
@@ -63,6 +64,8 @@ public static class PrefabManager
 	{
 		foreach (GameObject gameObject in NetworkClient.prefabs.Values)
 		{
+			Log.Info($"{gameObject.name}: {gameObject.GetComponent<AdminToyBase>()?.GetType().Name}");
+			
 			if (gameObject.TryGetComponent(out PrimitiveObjectToy primitiveObjectToy))
 			{
 				PrimitiveObject = primitiveObjectToy;
@@ -75,27 +78,27 @@ public static class PrefabManager
 				continue;
 			}
 
-			if (gameObject.TryGetComponent(out DoorVariant doorVariant))
-			{
+			// if (gameObject.TryGetComponent(out DoorVariant doorVariant))
+			// {
 				switch (gameObject.name)
 				{
 					case "LCZ BreakableDoor":
-						DoorLcz = doorVariant;
+						DoorLcz = gameObject;
 						continue;
 					case "HCZ BreakableDoor":
-						DoorHcz = doorVariant;
+						DoorHcz = gameObject;
 						continue;
 					case "EZ BreakableDoor":
-						DoorEz = doorVariant;
+						DoorEz = gameObject;
 						continue;
 					case "HCZ BulkDoor":
-						DoorHeavyBulk = doorVariant;
+						DoorHeavyBulk = gameObject;
 						continue;
 					case "Spawnable Unsecured Pryable GateDoor":
-						DoorGate = doorVariant;
+						DoorGate = gameObject;
 						continue;
 				}
-			}
+			// }
 
 			if (gameObject.TryGetComponent(out ShootingTarget shootingTarget))
 			{
