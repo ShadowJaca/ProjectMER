@@ -11,7 +11,7 @@ public class SerializableShootingTarget : SerializableObject
 {
 	public TargetType TargetType { get; set; } = TargetType.ClassD;
 	
-	public override GameObject SpawnOrUpdateObject(Room? room = null, GameObject? instance = null)
+	public override GameObject SpawnOrUpdateObject(Exiled.API.Features.Room? room = null, GameObject? instance = null)
 	{
 		ShootingTarget shootingTarget = instance == null ? UnityEngine.Object.Instantiate(TargetPrefab) : instance.GetComponent<ShootingTarget>();
 		Vector3 position = room.GetAbsolutePosition(Position);

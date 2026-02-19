@@ -21,7 +21,7 @@ public class SerializableItemSpawnpoint : SerializableObject, IIndicatorDefiniti
 	public bool UseGravity { get; set; } = true;
 	public bool CanBePickedUp { get; set; } = true;
 
-	public override GameObject? SpawnOrUpdateObject(Room? room = null, GameObject? instance = null)
+	public override GameObject? SpawnOrUpdateObject(Exiled.API.Features.Room? room = null, GameObject? instance = null)
 	{
 		GameObject itemSpawnPoint = instance ?? new GameObject("ItemSpawnpoint");
 		Vector3 position = room.GetAbsolutePosition(Position);
@@ -67,7 +67,7 @@ public class SerializableItemSpawnpoint : SerializableObject, IIndicatorDefiniti
 
 		return itemSpawnPoint.gameObject;
 	}
-	public GameObject SpawnOrUpdateIndicator(Room room, GameObject? instance = null)
+	public GameObject SpawnOrUpdateIndicator(Exiled.API.Features.Room room, GameObject? instance = null)
 	{
 		PrimitiveObjectToy cube;
 

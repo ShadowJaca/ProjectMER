@@ -15,7 +15,7 @@ public class SerializableTeleport : SerializableObject, IIndicatorDefinition
 
 	public float Cooldown { get; set; } = 5f;
 
-	public override GameObject? SpawnOrUpdateObject(Room? room = null, GameObject? instance = null)
+	public override GameObject? SpawnOrUpdateObject(Exiled.API.Features.Room? room = null, GameObject? instance = null)
 	{
 		GameObject gameObject = instance ?? new GameObject("Teleport");
 		Vector3 position = room.GetAbsolutePosition(Position);
@@ -35,7 +35,7 @@ public class SerializableTeleport : SerializableObject, IIndicatorDefinition
 		return gameObject;
 	}
 
-	public GameObject SpawnOrUpdateIndicator(Room room, GameObject? instance = null)
+	public GameObject SpawnOrUpdateIndicator(Exiled.API.Features.Room room, GameObject? instance = null)
 	{
 		PrimitiveObjectToy root;
 		PrimitiveObjectToy trigger;

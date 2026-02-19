@@ -115,8 +115,8 @@ public class MapSchematic
 
 	public void SpawnObject<T>(string id, T serializableObject) where T : SerializableObject
 	{
-		List<Room> rooms = serializableObject.GetRooms();
-		foreach (Room room in rooms)
+		List<Exiled.API.Features.Room> rooms = serializableObject.GetRooms();
+		foreach (Exiled.API.Features.Room room in rooms)
 		{
 			if (serializableObject.Index < 0 || serializableObject.Index == room.GetRoomIndex())
 			{
@@ -129,7 +129,7 @@ public class MapSchematic
 			}
 		}
 
-		ListPool<Room>.Shared.Return(rooms);
+		ListPool<Exiled.API.Features.Room>.Shared.Return(rooms);
 	}
 
 	public void DestroyObject(string id)

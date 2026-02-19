@@ -13,7 +13,7 @@ public class SerializableWaypoint : SerializableObject, IIndicatorDefinition
 {
 	public const float ScaleMultiplier = 1 / 256f;
 
-	public override GameObject? SpawnOrUpdateObject(Room? room = null, GameObject? instance = null)
+	public override GameObject? SpawnOrUpdateObject(Exiled.API.Features.Room? room = null, GameObject? instance = null)
 	{
 		WaypointToy waypoint = instance == null ? GameObject.Instantiate(PrefabManager.Waypoint) : instance.GetComponent<WaypointToy>();
 		Vector3 position = room.GetAbsolutePosition(Position);
@@ -31,7 +31,7 @@ public class SerializableWaypoint : SerializableObject, IIndicatorDefinition
 		return waypoint.gameObject;
 	}
 
-	public GameObject SpawnOrUpdateIndicator(Room room, GameObject? instance = null)
+	public GameObject SpawnOrUpdateIndicator(Exiled.API.Features.Room room, GameObject? instance = null)
 	{
 		PrimitiveObjectToy primitive = instance == null ? UnityEngine.Object.Instantiate(PrefabManager.PrimitiveObject) : instance.GetComponent<PrimitiveObjectToy>();
 		Vector3 position = room.GetAbsolutePosition(Position);

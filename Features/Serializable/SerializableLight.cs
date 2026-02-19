@@ -33,7 +33,7 @@ public class SerializableLight : SerializableObject, IIndicatorDefinition
 	[YamlIgnore]
 	public override Vector3 Scale { get; set; }
 
-	public override GameObject SpawnOrUpdateObject(Room? room = null, GameObject? instance = null)
+	public override GameObject SpawnOrUpdateObject(Exiled.API.Features.Room? room = null, GameObject? instance = null)
 	{
 		LightSourceToy light = instance == null ? UnityEngine.Object.Instantiate(PrefabManager.LightSource) : instance.GetComponent<LightSourceToy>();
 		Vector3 position = room.GetAbsolutePosition(Position);
@@ -59,7 +59,7 @@ public class SerializableLight : SerializableObject, IIndicatorDefinition
 		return light.gameObject;
 	}
 
-	public GameObject SpawnOrUpdateIndicator(Room room, GameObject? instance = null)
+	public GameObject SpawnOrUpdateIndicator(Exiled.API.Features.Room room, GameObject? instance = null)
 	{
 		PrimitiveObjectToy primitive = instance == null ? UnityEngine.Object.Instantiate(PrefabManager.PrimitiveObject) : instance.GetComponent<PrimitiveObjectToy>();
 		Vector3 position = room.GetAbsolutePosition(Position);

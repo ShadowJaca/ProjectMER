@@ -25,7 +25,7 @@ public abstract class SerializableObject
 
 	public virtual int Index { get; set; } = -1;
 
-	public virtual GameObject? SpawnOrUpdateObject(Room? room = null, GameObject? instance = null) => throw new NotSupportedException();
+	public virtual GameObject? SpawnOrUpdateObject(Exiled.API.Features.Room? room = null, GameObject? instance = null) => throw new NotSupportedException();
 
 	[YamlIgnore]
 	public virtual bool RequiresReloading => Index != _prevIndex;

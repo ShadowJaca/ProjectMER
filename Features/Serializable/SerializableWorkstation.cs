@@ -14,7 +14,7 @@ public class SerializableWorkstation : SerializableObject
 	/// </summary>
 	public bool IsInteractable { get; set; } = true;
 
-	public override GameObject SpawnOrUpdateObject(Room? room = null, GameObject? instance = null)
+	public override GameObject SpawnOrUpdateObject(Exiled.API.Features.Room? room = null, GameObject? instance = null)
 	{
 		WorkstationController workstation = instance == null ? UnityEngine.Object.Instantiate(PrefabManager.Workstation) : instance.GetComponent<WorkstationController>();
 		Vector3 position = room.GetAbsolutePosition(Position);

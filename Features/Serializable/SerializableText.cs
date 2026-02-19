@@ -15,7 +15,7 @@ public class SerializableText : SerializableObject, IIndicatorDefinition
 
 	public Vector3 DisplaySize { get; set; } = TextToy.DefaultDisplaySize;
 
-	public override GameObject? SpawnOrUpdateObject(Room? room = null, GameObject? instance = null)
+	public override GameObject? SpawnOrUpdateObject(Exiled.API.Features.Room? room = null, GameObject? instance = null)
 	{
 		TextToy text = instance == null ? UnityEngine.Object.Instantiate(PrefabManager.Text) : instance.GetComponent<TextToy>();
 		Vector3 position = room.GetAbsolutePosition(Position);
@@ -35,7 +35,7 @@ public class SerializableText : SerializableObject, IIndicatorDefinition
 		return text.gameObject;
 	}
 	
-	public GameObject SpawnOrUpdateIndicator(Room room, GameObject? instance = null)
+	public GameObject SpawnOrUpdateIndicator(Exiled.API.Features.Room room, GameObject? instance = null)
 	{
 		PrimitiveObjectToy cube;
 

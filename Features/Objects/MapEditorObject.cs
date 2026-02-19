@@ -14,11 +14,11 @@ public class MapEditorObject : MonoBehaviour
 
 	public string Id { get; protected set; }
 
-	public Room Room { get; protected set; }
+	public Exiled.API.Features.Room Room { get; protected set; }
 
 	public MapSchematic Map => MapUtils.LoadedMaps[MapName];
 
-	public MapEditorObject Init(SerializableObject serializableObject, string mapName, string id, Room room)
+	public MapEditorObject Init(SerializableObject serializableObject, string mapName, string id, Exiled.API.Features.Room room)
 	{
 		Base = serializableObject;
 		MapName = mapName;

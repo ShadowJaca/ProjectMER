@@ -20,7 +20,7 @@ public class SerializableLocker : SerializableObject
 
 	public List<SerializableLockerChamber> Chambers { get; set; } = [];
 
-	public override GameObject? SpawnOrUpdateObject(Room? room = null, GameObject? instance = null)
+	public override GameObject? SpawnOrUpdateObject(Exiled.API.Features.Room? room = null, GameObject? instance = null)
 	{
 		Locker locker = instance == null ? UnityEngine.Object.Instantiate(LockerPrefab) : instance.GetComponent<Locker>();
 		Vector3 position = room.GetAbsolutePosition(Position);

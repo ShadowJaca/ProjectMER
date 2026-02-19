@@ -13,7 +13,7 @@ public class SerializableScp079Camera : SerializableObject
 	public CameraType CameraType { get; set; } = CameraType.Lcz;
 	public string Label { get; set; } = "CustomCamera";
 
-	public override GameObject SpawnOrUpdateObject(Room? room = null, GameObject? instance = null)
+	public override GameObject SpawnOrUpdateObject(Exiled.API.Features.Room? room = null, GameObject? instance = null)
 	{
 		Scp079CameraToy cameraVariant;
 		Vector3 position = room.GetAbsolutePosition(Position);
@@ -38,7 +38,7 @@ public class SerializableScp079Camera : SerializableObject
 
 		cameraVariant.NetworkMovementSmoothing = 60;
 		cameraVariant.NetworkLabel = Label;
-		cameraVariant.NetworkRoom = room == null ? LabApi.Features.Wrappers.Room.Get(RoomName.Outside).First().Base : room.Base;
+		cameraVariant.NetworkRoom = room == null ? LabApi.Features.Wrappers.Room.Get(RoomName.Outside).First().Base : room.Identifier;
 
 		if (instance == null)
 			NetworkServer.Spawn(cameraVariant.gameObject);

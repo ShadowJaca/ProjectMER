@@ -16,7 +16,7 @@ public class SerializableDoor : SerializableObject
 	public bool RequireAll { get; set; } = true;
 	public GameObject Door { get; set; }
 
-	public override GameObject SpawnOrUpdateObject(Room? room = null, GameObject? instance = null)
+	public override GameObject SpawnOrUpdateObject(Exiled.API.Features.Room? room = null, GameObject? instance = null)
 	{
 		DoorVariant doorVariant;
 		Vector3 position = room.GetAbsolutePosition(Position);

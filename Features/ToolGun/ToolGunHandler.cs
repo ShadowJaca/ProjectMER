@@ -1,3 +1,4 @@
+using Exiled.API.Enums;
 using LabApi.Features.Wrappers;
 using MapGeneration;
 using ProjectMER.Configs;
@@ -26,9 +27,9 @@ public static class ToolGunHandler
 
 	public static void CreateObject(Vector3 position, ToolGunObjectType objectType, string schematicName = "")
 	{
-		Room room = RoomExtensions.GetRoomAtPosition(position);
+		Exiled.API.Features.Room room = RoomExtensions.GetRoomAtPosition(position);
 
-		position = room.Name == RoomName.Outside ? position : room.Transform.InverseTransformPoint(position);
+		position = room.Type == RoomType.Surface ? position : room.Transform.InverseTransformPoint(position);
 		string roomId = room.GetRoomStringId();
 
 		MapSchematic map = MapUtils.UntitledMap;

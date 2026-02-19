@@ -128,8 +128,8 @@ public static class ToolGunUI
 
 	private static string GetRoomString(Player player)
 	{
-		Room room = RoomExtensions.GetRoomAtPosition(player.Camera.transform.position);
-		List<Room> list = ListPool<Room>.Shared.Rent(Room.List.Where(x => x.Base != null && x.Zone == room.Zone && x.Shape == room.Shape && x.Name == room.Name));
+		Exiled.API.Features.Room room = RoomExtensions.GetRoomAtPosition(player.Camera.transform.position);
+		List<Exiled.API.Features.Room> list = ListPool<Exiled.API.Features.Room>.Shared.Rent(Exiled.API.Features.Room.List.Where(x => x.Identifier != null && x.Zone == room.Zone && x.RoomShape == room.RoomShape && x.Name == room.Name));
 
 		string roomString;
 		if (list.Count == 1)
@@ -141,7 +141,7 @@ public static class ToolGunUI
 			roomString = $"{room.GetRoomStringId()} ({list.IndexOf(room)}) ({list.Count})";
 		}
 
-		ListPool<Room>.Shared.Return(list);
+		ListPool<Exiled.API.Features.Room>.Shared.Return(list);
 		return roomString;
 	}
 }

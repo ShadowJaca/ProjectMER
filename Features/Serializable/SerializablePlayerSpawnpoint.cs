@@ -17,7 +17,7 @@ public class SerializablePlayerSpawnpoint : SerializableObject, IIndicatorDefini
 	[YamlIgnore]
 	public override Vector3 Scale { get; set; }
 
-	public override GameObject SpawnOrUpdateObject(Room? room = null, GameObject? instance = null)
+	public override GameObject SpawnOrUpdateObject(Exiled.API.Features.Room? room = null, GameObject? instance = null)
 	{
 		GameObject spawnpoint = instance ?? new GameObject("PlayerSpawnpoint");
 		Vector3 position = room.GetAbsolutePosition(Position);
@@ -29,7 +29,7 @@ public class SerializablePlayerSpawnpoint : SerializableObject, IIndicatorDefini
 		return spawnpoint.gameObject;
 	}
 
-	public GameObject SpawnOrUpdateIndicator(Room room, GameObject? instance = null)
+	public GameObject SpawnOrUpdateIndicator(Exiled.API.Features.Room room, GameObject? instance = null)
 	{
 		PrimitiveObjectToy root;
 		PrimitiveObjectToy cylinder;

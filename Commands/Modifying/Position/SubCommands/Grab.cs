@@ -1,4 +1,5 @@
 ﻿using CommandSystem;
+using Exiled.API.Enums;
 using LabApi.Features.Permissions;
 using LabApi.Features.Wrappers;
 using MEC;
@@ -47,8 +48,8 @@ public class Grab : ICommand
 			Timing.KillCoroutines(GrabbingPlayers[player]);
 			GrabbingPlayers.Remove(player);
 
-			Room room = mapEditorObject.Room;
-			mapEditorObject.Base.Position = room.Name == MapGeneration.RoomName.Outside ? mapEditorObject.transform.position : mapEditorObject.Room.Transform.InverseTransformPoint(mapEditorObject.transform.position);
+			Exiled.API.Features.Room room = mapEditorObject.Room;
+			mapEditorObject.Base.Position = room.Type == RoomType.Surface ? mapEditorObject.transform.position : mapEditorObject.Room.Transform.InverseTransformPoint(mapEditorObject.transform.position);
 			mapEditorObject.UpdateObjectAndCopies();
 
 			response = "Ungrabbed";

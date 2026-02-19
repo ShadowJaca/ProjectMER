@@ -22,10 +22,10 @@
     <Reference Include="YamlDotNet" HintPath="$(SL_REFERENCES)\YamlDotNet.dll" />
     <Reference Include="NorthwoodLib" HintPath="$(SL_REFERENCES)\NorthwoodLib.dll" />
     <Reference Include="LabApi" HintPath="$(SL_REFERENCES)\LabApi.dll" />
-    <Reference Include="Exiled" HintPath="$(SL_REFERENCES)\Exiled.Api.dll" />
   </ItemGroup>
 
   <ItemGroup>
+    <PackageReference Include="ExMod.Exiled" Version="9.13.1" />
     <PackageReference Include="Lib.Harmony" Version="2.3.6" />
   </ItemGroup>
 
