@@ -59,6 +59,16 @@ public static class PrefabManager
 
 	public static WaypointToy Waypoint { get; private set; }
 	public static SpawnableCullingParent CullingParent { get; private set; }
+	
+	public static GameObject SimpleBoxesOpenConnector { get; private set; }
+	public static GameObject PipesShortOpenConnector { get; private set; }
+	public static GameObject BoxesLadderOpenConnector { get; private set; }
+	public static GameObject TankSupportedShelfOpenConnector { get; private set; }
+	public static GameObject AngledFencesOpenConnector { get; private set; }
+	public static GameObject HugeOrangePipesOpenConnector { get; private set; }
+	public static GameObject PipesLongOpenConnector { get; private set; }
+	public static GameObject Sinkhole { get; private set; }
+	public static GameObject TantrumObjBrownCandy { get; private set; }
 
 	public static void RegisterPrefabs()
 	{
@@ -97,6 +107,35 @@ public static class PrefabManager
 					case "Spawnable Unsecured Pryable GateDoor":
 						DoorGate = gameObject;
 						continue;
+					
+					case "Simple Boxes Open Connector":
+						SimpleBoxesOpenConnector = gameObject;
+						continue;
+					case "Pipes Short Open Connector":
+						PipesShortOpenConnector = gameObject;
+						continue;
+					case "Boxes Ladder Open Connector":
+						BoxesLadderOpenConnector = gameObject;
+						continue;
+					case "Tank-Supported Shelf Open Connector":
+						TankSupportedShelfOpenConnector = gameObject;
+						continue;
+					case "Angled Fences Open Connector":
+						AngledFencesOpenConnector = gameObject;
+						continue;
+					case "Huge Orange Pipes Open Connector":
+						HugeOrangePipesOpenConnector = gameObject;
+						continue;
+					case "Pipes Long Open Connector":
+						PipesLongOpenConnector = gameObject;
+						continue;
+					case "Sinkhole":
+						Sinkhole = gameObject;
+						continue;
+					case "TantrumObj (Brown Candy)":
+						TantrumObjBrownCandy = gameObject;
+						continue;
+						
 				}
 			// }
 
@@ -161,7 +200,7 @@ public static class PrefabManager
 				Interactable = interactableToy;
 				continue;
 			}
-
+			
 			if (gameObject.TryGetComponent(out Locker locker))
 			{
 				switch (gameObject.name)

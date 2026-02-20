@@ -35,6 +35,7 @@ public class ToolGunItem
 		{ ToolGunObjectType.Teleport, typeof(SerializableTeleport) },
 		{ ToolGunObjectType.Interactable, typeof(SerializableInteractable) },
 		{ ToolGunObjectType.Waypoint, typeof(SerializableWaypoint) },
+		{ ToolGunObjectType.Prefab, typeof(SerializablePrefab) }
 	};
 
 	private ToolGunObjectType _selectedObjectToSpawn;

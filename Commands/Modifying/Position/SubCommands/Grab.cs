@@ -82,7 +82,7 @@ public class Grab : ICommand
 
 			prevPos = newPos;
 			mapEditorObject.transform.position = prevPos;
-			if (mapEditorObject.Base is SerializableDoor _)
+			if (mapEditorObject.Base is SerializableDoor or SerializablePrefab)
 			{
 				NetworkServer.UnSpawn(mapEditorObject.gameObject);
 				NetworkServer.Spawn(mapEditorObject.gameObject);

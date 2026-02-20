@@ -52,6 +52,8 @@ public class MapSchematic
 	public Dictionary<string, SerializableLocker> Lockers { get; set; } = [];
 
 	public Dictionary<string, SerializableWaypoint> Waypoints { get; set; } = [];
+	public Dictionary<string, SerializablePrefab> Prefabs { get; set; } = [];
+	
 
 	public List<MapEditorObject> SpawnedObjects = [];
 
@@ -72,6 +74,7 @@ public class MapSchematic
 		Teleports.AddRange(other.Teleports);
 		Lockers.AddRange(other.Lockers);
 		Waypoints.AddRange(other.Waypoints);
+		Prefabs.AddRange(other.Prefabs);
 
 		return this;
 	}
@@ -112,6 +115,11 @@ public class MapSchematic
 			SpawnObject(kVP.Key, kVP.Value);
 		});
 		Waypoints.ForEach(kVP => SpawnObject(kVP.Key, kVP.Value));
+		Prefabs.ForEach(kVP =>
+		{
+			kVP.Value._prevType = kVP.Value.PrefabType;
+			SpawnObject(kVP.Key, kVP.Value);
+		});
 	}
 
 	public void SpawnObject<T>(string id, T serializableObject) where T : SerializableObject
@@ -194,6 +202,9 @@ public class MapSchematic
 
 		if (Waypoints.TryAdd(id, serializableObject))
 			return true;
+		
+		if(Prefabs.TryAdd(id, serializableObject))
+			return true;
 
 		IsDirty = dirtyPrevValue;
 		return false;
@@ -248,6 +259,9 @@ public class MapSchematic
 
 		if (Waypoints.Remove(id))
 			return true;
+		
+		if (Prefabs.Remove(id))
+			return true;
 
 		IsDirty = dirtyPrevValue;
 		return false;
@@ -281,6 +295,7 @@ public class MapSchematic
 		foreach (var obj in rebuiltMap.Teleports.Values) obj.Rebuild();
 		foreach (var obj in rebuiltMap.Lockers.Values) obj.Rebuild();
 		foreach (var obj in rebuiltMap.Waypoints.Values) obj.Rebuild();
+		foreach (var obj in rebuiltMap.Prefabs.Values) obj.Rebuild();
 
 		string path = Path.Combine(ProjectMER.MapsDir, $"{rebuiltMap.Name}.yml");
 		File.WriteAllText(path, YamlParser.Serializer.Serialize(rebuiltMap));

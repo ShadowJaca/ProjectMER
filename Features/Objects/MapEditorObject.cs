@@ -73,6 +73,9 @@ public class MapEditorObject : MonoBehaviour
 	/// </summary>
 	public void Destroy()
 	{
+		if (this == null || gameObject == null)
+			return;
+
 		IndicatorObject.TryDestroyIndicator(this);
 		Destroy(gameObject);
 	}
