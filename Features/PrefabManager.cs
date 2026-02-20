@@ -74,8 +74,6 @@ public static class PrefabManager
 	{
 		foreach (GameObject gameObject in NetworkClient.prefabs.Values)
 		{
-			Log.Info($"{gameObject.name}: {gameObject.GetComponent<AdminToyBase>()?.GetType().Name}");
-			
 			if (gameObject.TryGetComponent(out PrimitiveObjectToy primitiveObjectToy))
 			{
 				PrimitiveObject = primitiveObjectToy;
