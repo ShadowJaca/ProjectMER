@@ -1,3 +1,4 @@
+using Exiled.API.Features;
 using Interactables.Interobjects.DoorUtils;
 using LabApi.Features.Wrappers;
 using Mirror;
@@ -18,6 +19,7 @@ public class SerializableDoor : SerializableObject
 
 	public override GameObject SpawnOrUpdateObject(Exiled.API.Features.Room? room = null, GameObject? instance = null)
 	{
+		Log.Warn($"Drzwi {Room} - {room}");
 		DoorVariant doorVariant;
 		Vector3 position = room.GetAbsolutePosition(Position);
 		Quaternion rotation = room.GetAbsoluteRotation(Rotation);

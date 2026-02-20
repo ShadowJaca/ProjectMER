@@ -1,3 +1,4 @@
+using Exiled.API.Features;
 using LabApi.Features.Wrappers;
 using NorthwoodLib.Pools;
 using ProjectMER.Features.Extensions;
@@ -250,5 +251,38 @@ public class MapSchematic
 
 		IsDirty = dirtyPrevValue;
 		return false;
+	}
+
+	public void Rebuild()
+	{
+		string originalName = Name;
+		foreach (string mapName in MapUtils.LoadedMaps.Keys.ToList())
+		{
+			MapUtils.UnloadMap(mapName);
+		}
+
+		string yaml = YamlParser.Serializer.Serialize(this);
+		MapSchematic rebuiltMap = YamlParser.Deserializer.Deserialize<MapSchematic>(yaml);
+
+		rebuiltMap.Name = $"{originalName}_Rebuilt";
+
+		foreach (var obj in rebuiltMap.Primitives.Values) obj.Rebuild();
+		foreach (var obj in rebuiltMap.Lights.Values) obj.Rebuild();
+		foreach (var obj in rebuiltMap.Doors.Values) obj.Rebuild();
+		foreach (var obj in rebuiltMap.Workstations.Values) obj.Rebuild();
+		foreach (var obj in rebuiltMap.ItemSpawnpoints.Values) obj.Rebuild();
+		foreach (var obj in rebuiltMap.PlayerSpawnpoints.Values) obj.Rebuild();
+		foreach (var obj in rebuiltMap.Capybaras.Values) obj.Rebuild();
+		foreach (var obj in rebuiltMap.Texts.Values) obj.Rebuild();
+		foreach (var obj in rebuiltMap.Interactables.Values) obj.Rebuild();
+		foreach (var obj in rebuiltMap.Schematics.Values) obj.Rebuild();
+		foreach (var obj in rebuiltMap.Scp079Cameras.Values) obj.Rebuild();
+		foreach (var obj in rebuiltMap.ShootingTargets.Values) obj.Rebuild();
+		foreach (var obj in rebuiltMap.Teleports.Values) obj.Rebuild();
+		foreach (var obj in rebuiltMap.Lockers.Values) obj.Rebuild();
+		foreach (var obj in rebuiltMap.Waypoints.Values) obj.Rebuild();
+
+		string path = Path.Combine(ProjectMER.MapsDir, $"{rebuiltMap.Name}.yml");
+		File.WriteAllText(path, YamlParser.Serializer.Serialize(rebuiltMap));
 	}
 }
