@@ -5,6 +5,7 @@ using Mirror;
 using ProjectMER.Features.Enums;
 using ProjectMER.Features.Extensions;
 using UnityEngine;
+using YamlDotNet.Serialization;
 
 namespace ProjectMER.Features.Serializable;
 
@@ -15,6 +16,7 @@ public class SerializableDoor : SerializableObject
 	public bool IsLocked { get; set; } = false;
 	public DoorPermissionFlags RequiredPermissions { get; set; } = DoorPermissionFlags.None;
 	public bool RequireAll { get; set; } = true;
+	[YamlIgnore]
 	public GameObject Door { get; set; }
 
 	public override GameObject SpawnOrUpdateObject(Exiled.API.Features.Room? room = null, GameObject? instance = null)
