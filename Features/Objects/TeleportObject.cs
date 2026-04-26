@@ -15,9 +15,9 @@ public class TeleportObject : MonoBehaviour
 
 	public SerializableTeleport Base;
 	private MapEditorObject _mapEditorObject;
-
+	[Obsolete("Use NextTimeUseForPlayer instead")]
 	public DateTime NextTimeUse;
-	public Dictionary<Player, DateTime> NextTimeUseForPlayer;
+	public Dictionary<Player, DateTime> NextTimeUseForPlayer = new Dictionary<Player, DateTime>();
 
 	public TeleportObject? GetRandomTarget()
 	{
@@ -40,7 +40,7 @@ public class TeleportObject : MonoBehaviour
 		if (player is null)
 			return;
 
-		if (NextTimeUseForPlayer[player] > DateTime.Now)
+		if (NextTimeUseForPlayer.TryGetValue(player, out DateTime nextTimeUse) && nextTimeUse > DateTime.Now)
 			return;
 
 		TeleportObject? target = GetRandomTarget();
