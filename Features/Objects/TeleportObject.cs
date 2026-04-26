@@ -17,6 +17,7 @@ public class TeleportObject : MonoBehaviour
 	private MapEditorObject _mapEditorObject;
 
 	public DateTime NextTimeUse;
+	public Dictionary<Player, DateTime> NextTimeUseForPlayer;
 
 	public TeleportObject? GetRandomTarget()
 	{
@@ -39,7 +40,7 @@ public class TeleportObject : MonoBehaviour
 		if (player is null)
 			return;
 
-		if (NextTimeUse > DateTime.Now)
+		if (NextTimeUseForPlayer[player] > DateTime.Now)
 			return;
 
 		TeleportObject? target = GetRandomTarget();
@@ -47,8 +48,8 @@ public class TeleportObject : MonoBehaviour
 			return;
 
 		DateTime dateTime = DateTime.Now.AddSeconds(Base.Cooldown);
-		NextTimeUse = dateTime;
-		target.NextTimeUse = dateTime;
+		NextTimeUseForPlayer[player] = dateTime;
+		target.NextTimeUseForPlayer[player] = dateTime;
 
 		player.Position = target.gameObject.transform.position;
 		player.LookRotation = target.gameObject.transform.eulerAngles;
